@@ -20,60 +20,62 @@ menu_btn.addEventListener("click", function () {
   }
 });
 
+
 //get Anime
 next.addEventListener("click", () => {
   card_layout.innerHTML = '';
   console.log("nxt is clicked");
   page += 20;
-  localStorage.setItem("page", page);
   getAnime();
 });
 prev.addEventListener("click", () => {
   card_layout.innerHTML = '';
-  console.log("nxt is clicked");
+  console.log("prev is clicked");
   page -= 20;
-  localStorage.setItem("page", page);
   getAnime();
 });
 first.addEventListener("click", () => {
   card_layout.innerHTML = '';
-  console.log("nxt is clicked");
+  console.log("first is clicked");
   page = 0;
-  localStorage.setItem("page", page);
   getAnime();
 });
 last.addEventListener("click", () => {
   card_layout.innerHTML = '';
-  console.log("nxt is clicked");
+  console.log("last is clicked");
   page = 18878;
-  localStorage.setItem("page", page);
   getAnime();
 });
 
 
 
+
 const getAnime = async () => {
-    localStorage.getItem('page')
-    console.log(page);
     let url = `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${page}`;
+    console.log(url)
     let data = await fetch(url);
     animeList = await data.json();
-    console.log(animeList);
     const anime = animeList.data.map((animedata) => ({
       ...animedata,
     }));
     displayAnime(anime);
   }
 
-
 const displayAnime = async (anime) => {
   const animeHTML = anime;
   animeHTML.forEach((info) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    const image_upper = document.createElement("div");
+    image_upper.classList.add('image_upper');
     const img_card = document.createElement("img");
     img_card.src = `${info.attributes.posterImage.large}`;
     img_card.classList.add("card__cover");
+    const box_rating = document.createElement('div');
+    box_rating.classList.add("box_rating");
+    const value = `${info.attributes.averageRating}`;
+    box_rating.innerText = Math.round(value) + ' / 100';
+    image_upper.append(img_card, box_rating);
     const info_container = document.createElement("div");
     info_container.classList.add("card__content");
     const anime_heading = document.createElement("h3");
@@ -83,7 +85,7 @@ const displayAnime = async (anime) => {
       anime_heading.innerText = `${info.attributes.titles.en_jp}`;
     }
     info_container.append(anime_heading);
-    card.append(img_card, info_container);
+    card.append(image_upper, info_container);
     card.addEventListener("click", () => {
       getID(info);
     });
@@ -92,15 +94,10 @@ const displayAnime = async (anime) => {
 };
 
 const getID = async (info) => {
-  console.log(info);
   localStorage.setItem("animeInfo", JSON.stringify(info));
+  localStorage.setItem("pageNum", page);  
   location.href = "./page.html";
 };
-
-if (performance.getEntriesByType("navigation")[0].type === 'reload') {
-  page = page;
-  localStorage.setItem("page", page);
-}
 
 
 //tooltip
@@ -109,4 +106,18 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
+const page1 = localStorage.getItem('pageNum');
+const page2 = localStorage.getItem('page2');
+console.log(page1);
+console.log(page2);
+if(page1 == page2){
+  page = Number(page2);
+  getAnime();
+}
+
 getAnime();
+
+
+
+
+

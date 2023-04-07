@@ -7,7 +7,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-body{
+body {
   background: #212121;
 }
 
@@ -49,7 +49,6 @@ a {
   text-decoration: none;
 }
 
-
 nav {
   display: grid;
   grid-gap: 16px;
@@ -57,23 +56,14 @@ nav {
   grid-template-columns: repeat(4, auto);
 }
 
-nav a{
+nav a {
   color: white;
 }
 
-nav a:hover{
-  color:#fce166 ;
+nav a:hover {
+  color: #fce166;
 }
 
-@media screen and (max-width: 767px) {
-  nav {
-    display: none;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-}
 
 .hamburger {
   position: relative;
@@ -123,11 +113,9 @@ nav a:hover{
   padding-top: 140px;
   transition: 0.4s;
 }
-
 .mobile-nav.is-active {
   bottom: 0;
 }
-
 .mobile-nav a {
   display: block;
   text-align: center;
@@ -142,15 +130,11 @@ nav a:hover{
   color: rgb(19, 18, 18);
 }
 
-@media screen and (min-width: 767px) {
-  .hamburger,
-  .mobile-nav {
-    display: none;
-  }
+.mobile-nav a:active, .mobile-nav a:hover {
+  color: rgb(19, 18, 18) !important;
 }
 
 /* Main Section  */
-
 main {
   background: url("https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/05/10-Anime-Series-Fans-Love-To-Hate-1.jpg")
     no-repeat center;
@@ -181,22 +165,10 @@ main::after {
   flex-direction: column;
   align-items: flex-start;
 }
-
 .main-wrapper h1 {
   font-size: 65px !important;
   line-height: 88px;
   font-weight: 600;
-}
-
-@media screen and (max-width: 450px) {
-  .main-wrapper h1 {
-    font-size: 55px!important;
-    line-height: 75px !important;
-  }
-
-  .mobile-nav{
-    padding: 120px 20px;
-  }
 }
 
 .banner-span {
@@ -228,39 +200,34 @@ main::after {
   background: white;
 }
 
-.btn:hover{
-  transform:translateY(-9px);
-  transition: .8s ease
+.btn:hover {
+  transform: translateY(-9px);
+  transition: 0.8s ease;
 }
 
-.second-btn{
+.second-btn {
   background: #fce166;
 }
 .second-btn a {
-  color: #191b24 ;
+  color: #191b24;
 }
 
-
-
 /* Anime Container  */
-.anime-container{
+.anime-container {
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
   margin: 0 auto !important;
   color: #191b24 !important;
-
 }
 
 #card-layout__itemz {
   width: 100%;
   display: grid;
-  grid-template-columns: 
-  repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 80px;
   padding: 40px;
 }
-
 
 .card {
   display: flex;
@@ -268,30 +235,104 @@ main::after {
   border-radius: 30px;
   border: solid 1px #fce166;
   background: #212121;
-  box-shadow: 15px 15px 30px rgb(25, 25, 25),
-              -15px -15px 30px rgb(29, 29, 29);
+  box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(29, 29, 29);
 }
 
-.card img{
-    width: 100%;
-    height: auto;
-    border-radius: 30px;
-    object-fit: cover;
+.image_upper {
+  position: relative;
+  padding: 10px;
 }
 
-.card__cover {
+.card img {
   width: 100%;
+  height: auto;
+  border-radius: 30px;
+  object-fit: cover;
 }
-.card__content{
-  padding: 10px 20px;
+
+.box_rating {
+  width: 80px;
+  height: 80px;
+  background: #212121;
+  border: solid 1px #fce166;
+  position: absolute;
+  top: -5px;
+  right: -18px;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__content {
+  padding: 20px;
   padding-bottom: 0px;
   color: white;
   text-align: center;
 }
 
-.card__content h3{
-  margin: 20px 0;
+.card__content h3 {
   font-weight: 500;
-  font-size:28px;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 767px) {
+  nav {
+    display: none;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .hamburger,
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .main-wrapper h1 {
+    font-size: 45px !important;
+    line-height: 60px !important;
+  }
+
+  .mobile-nav {
+    padding: 120px 20px;
+  }
+
+  header{
+    width: 100%;
+  }
+
+  .card{
+    width: 95%;
+  }
+
+  #card-layout__itemz{
+    padding: 40px 0px;
+    gap: 50px;
+  }
+
+  .card__content{
+    padding: 10px;
+  }
+
+  .card__content h3 {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .box_rating{
+    position: absolute;
+    top: 3%;
+    right: 50%;
+    transform: translate(50%,-50%);
+  }
 }
 

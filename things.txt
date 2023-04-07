@@ -1,5 +1,5 @@
 Things to do:
-- add average rating inside car element
+- when go back to page it must return to where was selected
 - maybe add a search bar?
 - add toast if card is selected
 - add loading page
@@ -9,6 +9,7 @@ Things to do:
 - add episode list -- 1,2,3,...
 - reviews
 - STREAMING LINKS!! if possible
+- add favicon.html
 - Deploy the website
 
 =======================
@@ -16,5 +17,16 @@ How to pagination?
 - page offset starts at 0, 5, 10, 15 
 - it increments 5 also decrements 5
 =======================
-How to create an overlay when card is hovered?
-- 
+page = 80
+sesend ko sa next page = 80
+babalik ko sa prev page = 80
+
+if(prev page == next page){
+    show prev page
+    api_url offset = 80
+}else{
+    normal page
+}
+======
+Error when clicked then the page number is clicked 
+- the string is added example. 120 80
