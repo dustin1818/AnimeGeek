@@ -1,0 +1,20 @@
+Things to do:
+- add average rating inside car element
+- maybe add a search bar?
+- add toast if card is selected
+- add loading page
+- add scroll up function
+- update styling of page 2
+- add relationships in page 2 so for example naruto(relationships: tsunade,sakura,sasuke,hinata)
+- add episode list -- 1,2,3,...
+- reviews
+- STREAMING LINKS!! if possible
+- Deploy the website
+
+=======================
+How to pagination?
+- page offset starts at 0, 5, 10, 15 
+- it increments 5 also decrements 5
+=======================
+How to create an overlay when card is hovered?
+- 

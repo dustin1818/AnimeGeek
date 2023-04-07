@@ -7,6 +7,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body{
+  background: #212121;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -21,7 +25,7 @@ header {
   width: 100%;
   margin: 0 auto;
   padding: 60px 50px;
-  max-width: 1400px;
+  max-width: 1920px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,26 +35,34 @@ header {
 .logoText {
   font-weight: 400;
   margin-top: 5px;
-  font-size:20px ;
+  font-size: 20px;
 }
 
 .logoSpan {
   font-weight: 900;
-  border: solid 4px #FCE166;
+  border: solid 4px #fce166;
   border-radius: 100px;
   padding: 2px 8px;
 }
 
 a {
-  color: #fff;
   text-decoration: none;
 }
+
 
 nav {
   display: grid;
   grid-gap: 16px;
   font-size: 14px;
   grid-template-columns: repeat(4, auto);
+}
+
+nav a{
+  color: white;
+}
+
+nav a:hover{
+  color:#fce166 ;
 }
 
 @media screen and (max-width: 767px) {
@@ -121,7 +133,7 @@ nav {
   text-align: center;
   margin-bottom: 20px !important;
   padding: 12px 16px;
-  background-color: #FCE166;
+  background-color: #fce166;
   opacity: 0.8;
   width: 100%;
   max-width: 450px;
@@ -136,7 +148,6 @@ nav {
     display: none;
   }
 }
-
 
 /* Main Section  */
 
@@ -157,63 +168,130 @@ main::after {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgb(33, 29, 28);
+  background: rgb(0, 0, 0);
   z-index: 0;
-  opacity: 0.4;
+  opacity: 0.7;
+  height: 100vh;
+}
+
+.main-wrapper {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.main-wrapper h1 {
+  font-size: 65px !important;
+  line-height: 88px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 450px) {
+  .main-wrapper h1 {
+    font-size: 55px!important;
+    line-height: 75px !important;
+  }
+
+  .mobile-nav{
+    padding: 120px 20px;
+  }
+}
+
+.banner-span {
+  color: #fce166;
+}
+
+.container h3 {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #191b24;
+  outline: none;
+  border: none;
+  background: white;
+}
+
+.btn:hover{
+  transform:translateY(-9px);
+  transition: .8s ease
+}
+
+.second-btn{
+  background: #fce166;
+}
+.second-btn a {
+  color: #191b24 ;
 }
 
 
 
-.main-wrapper{
-    position:relative;
-    z-index:1;
-    color:#fff;
-    flex-direction:column;
-    align-items:flex-start;
-  }
-  
-  .main-wrapper h1{
-    font-size:65px !important;
-    line-height: 120px;
-    font-weight: 600;
+/* Anime Container  */
+.anime-container{
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  margin: 0 auto !important;
+  color: #191b24 !important;
 
-  }
-  
-  .banner-span{
-    color: #FCE166;
-  }
-  
-  .container h3{
-    margin:20px 0;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  
-  .btn-container{
-    display:flex;
-    gap:1rem;
-  }
-  
-  .btn{
-    cursor:pointer;
-    display:inline-block;
-    padding:12px 16px;
-    border-radius:8px;
-    margin-top:20px;
-    text-transform:uppercase;
-    font-weight:700;
-    color:black;
-    outline:none;
-    border:none;
-    background: white;
-  }
-  
-  .second-btn{
-    background:#FCE166;
-    color:#fff;
-  }
-  
-  
-  
-  
+}
+
+#card-layout__itemz {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 
+  repeat(auto-fit, minmax(350px, 1fr));
+  gap: 80px;
+  padding: 40px;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  border: solid 1px #fce166;
+  background: #212121;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25),
+              -15px -15px 30px rgb(29, 29, 29);
+}
+
+.card img{
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.card__cover {
+  width: 100%;
+}
+.card__content{
+  padding: 10px 20px;
+  padding-bottom: 0px;
+  color: white;
+  text-align: center;
+}
+
+.card__content h3{
+  margin: 20px 0;
+  font-weight: 500;
+  font-size:28px;
+}
 

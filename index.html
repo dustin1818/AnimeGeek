@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniMey</title>
+    <!-- //bootstrap CDN Links  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./main.css">
 </head>
 
 <body>
     <header>
-
         <div class="container">
             <h2 class="logoText">Anime<span class="logoSpan">Geek</span></h2>
             <nav>
@@ -33,18 +39,38 @@
         <a href="#">Contact</a>
     </nav>
 
-    <main>
+    <main id="page1">
         <div class="container main-wrapper">
             <h1>Enjoy Anime <br> For <span class="banner-span">Free</span> </br></h1>
             <h3>Stream with no ads <br>and explore anime to the fullest. </h3>
             <div class="btn-container">
                 <button class="btn">Start Now</button>
-                <button class="btn second-btn">View More</button>
+                <button class="btn second-btn"><a href="#card-layout__itemz">View More</a></button>
             </div>
         </div>
     </main>
 
-    <script src="/main.js"></script>
+    <section class="container anime-container ">
+        <div id="card-layout__itemz">
+
+        </div>
+
+        <div class="pagination-section mx-auto mt-5">
+            <ul class="pagination pagination1 d-flex">
+                <li class="page-item first" data-bs-toggle="tooltip" data-bs-placement="top" title="First Page"><a
+                        class="page-link"><i class="bi bi-chevron-double-left"></i></a></li>
+                <li class="page-item prev" data-bs-toggle="tooltip" data-bs-placement="top" title="Previous Page"><a
+                        class="page-link"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item next" data-bs-toggle="tooltip" data-bs-placement="top" title="Next Page"><a
+                        class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item last" data-bs-toggle="tooltip" data-bs-placement="top" title="Last Page"><a
+                        class="page-link"><i class="bi bi-chevron-double-right"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+
+    <script src="/AnimeGeek-ToContinue/main.js"></script>
 </body>
 
 </html>
