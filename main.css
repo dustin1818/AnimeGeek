@@ -64,13 +64,12 @@ nav a:hover {
   color: #fce166;
 }
 
-
 .hamburger {
   position: relative;
   display: block;
   width: 35px;
   cursor: pointer;
-  height: 35px;
+  height: 25px;
   border: none;
   background: none;
   outline: none;
@@ -81,7 +80,7 @@ nav a:hover {
 .hamburger:before {
   content: "";
   width: 100%;
-  height: 5px;
+  height: 4px;
   background-color: #fff;
   margin: 6px 0px;
   transition: 0.4s;
@@ -89,7 +88,7 @@ nav a:hover {
 }
 
 .hamburger.is-active:before {
-  transform: rotate(-45deg) translate(-7px, 8px);
+  transform: rotate(-45deg) translate(-5px, 5px);
 }
 
 .hamburger.is-active:after {
@@ -130,7 +129,8 @@ nav a:hover {
   color: rgb(19, 18, 18);
 }
 
-.mobile-nav a:active, .mobile-nav a:hover {
+.mobile-nav a:active,
+.mobile-nav a:hover {
   color: rgb(19, 18, 18) !important;
 }
 
@@ -216,9 +216,34 @@ main::after {
 .anime-container {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
   margin: 0 auto !important;
   color: #191b24 !important;
+  padding: 40px;
+}
+
+.container-input {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 0px 10px 40px;
+  border-radius: 9999px;
+  border: solid 1px #333;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+}
+
+.container-input svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+}
+
+.input:focus {
+  opacity: 1;
 }
 
 #card-layout__itemz {
@@ -226,7 +251,7 @@ main::after {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 80px;
-  padding: 40px;
+  padding: 40px 0;
 }
 
 .card {
@@ -236,6 +261,11 @@ main::after {
   border: solid 1px #fce166;
   background: #212121;
   box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(29, 29, 29);
+}
+
+.card:hover {
+  transform: scale(1.024);
+  transition: 0.1s all;
 }
 
 .image_upper {
@@ -304,20 +334,20 @@ main::after {
     padding: 120px 20px;
   }
 
-  header{
+  header {
     width: 100%;
   }
 
-  .card{
+  .card {
     width: 95%;
   }
 
-  #card-layout__itemz{
+  #card-layout__itemz {
     padding: 40px 0px;
     gap: 50px;
   }
 
-  .card__content{
+  .card__content {
     padding: 10px;
   }
 
@@ -328,11 +358,10 @@ main::after {
     margin-bottom: 10px;
   }
 
-  .box_rating{
+  .box_rating {
     position: absolute;
     top: 3%;
     right: 50%;
-    transform: translate(50%,-50%);
+    transform: translate(50%, -50%);
   }
 }
-
