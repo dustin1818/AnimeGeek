@@ -6,7 +6,7 @@ const displayInfo = () => {
   console.log(animeInfo);
   anime_name.innerText = `${animeInfo.attributes.titles.en_jp}`;
   const html = `
-    <img src="${animeInfo.attributes.posterImage.large}" alt="">
+    <img src="${animeInfo.attributes.posterImage.large}" alt="${animeInfo.attributes.posterImage.large}">
     <div class="anime-info"> 
     <p>Description:
     <br><br>${animeInfo.attributes.synopsis}</p>

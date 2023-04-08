@@ -66,6 +66,7 @@ const displayAnime = async (anime) => {
     image_upper.classList.add("image_upper");
     const img_card = document.createElement("img");
     img_card.src = `${info.attributes.posterImage.large}`;
+    img_card.alt = `${info.attributes.posterImage.large}`;
     img_card.classList.add("card__cover");
     const box_rating = document.createElement("div");
     box_rating.classList.add("box_rating");
@@ -152,6 +153,7 @@ const displaySearchAnime = (animeInput) => {
     image_upper.classList.add("image_upper");
     const img_card = document.createElement("img");
     img_card.src = `${animeInfo.attributes.posterImage.large}`;
+    img_card.alt = `${animeInfo.attributes.posterImage.large}`;
     img_card.classList.add("card__cover");
     const box_rating = document.createElement("div");
     box_rating.classList.add("box_rating");
