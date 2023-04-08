@@ -9,9 +9,6 @@ Things to do:
 - add episode list -- 1,2,3,...
 - reviews
 - STREAMING LINKS!! if possible
-- add favicon.html
-- Deploy the website
-
 =======================
 How to pagination?
 - page offset starts at 0, 5, 10, 15 
