@@ -378,6 +378,11 @@ main::after {
 
   header {
     width: 100%;
+    padding: 20px;
+  }
+
+  .container1{
+    padding: 0px !important;
   }
 
   .container_mouse {
