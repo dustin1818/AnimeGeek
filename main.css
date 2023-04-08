@@ -9,6 +9,7 @@
 
 body {
   background: #212121;
+  scroll-behavior: smooth;
 }
 
 header {
@@ -212,6 +213,47 @@ main::after {
   color: #191b24;
 }
 
+.container_mouse {
+  position: absolute;
+  bottom: -167px;
+  left: 50%;
+}
+
+.mouse-btn {
+  margin: 10px auto;
+  width: 40px;
+  height: 80px;
+  border: 3px solid rgba(122, 122, 124, 0.918);
+  border-radius: 20px;
+  display: flex;
+}
+
+.mouse-scroll {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(
+    170deg,
+    rgba(122, 122, 124, 0.918),
+    rgb(123, 124, 124)
+  );
+  border-radius: 50%;
+  margin: auto;
+  animation: scrolling13 1s linear infinite;
+}
+
+@keyframes scrolling13 {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+}
+
 /* Anime Container  */
 .anime-container {
   display: flex;
@@ -338,13 +380,26 @@ main::after {
     width: 100%;
   }
 
-  .card {
-    width: 95%;
+  .container_mouse {
+    left: 37%;
+  }
+
+  .mouse-btn {
+    width: 42px;
+    height: 73px;
   }
 
   #card-layout__itemz {
     padding: 40px 0px;
     gap: 50px;
+  }
+
+  .card {
+    width: 95%;
+  }
+
+  .container-input {
+    margin-top: 40px;
   }
 
   .card__content {
