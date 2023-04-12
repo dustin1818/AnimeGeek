@@ -1,9 +1,9 @@
 Things to do:
-- add pagination for search bar
 - add scroll up function
 - add categories tab
 - add toast if card is selected
 - add loading page
+- - add 404 error page
 - update styling of page 2
 - add relationships in page 2 so for example naruto(relationships: tsunade,sakura,sasuke,hinata)
 - add episode list -- 1,2,3,...

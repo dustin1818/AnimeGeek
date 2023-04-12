@@ -3,14 +3,23 @@ let menu_btn = document.querySelector(".hamburger");
 let mobile_btn = document.querySelector(".mobile-nav");
 let card_layout = document.getElementById("card-layout__itemz");
 //page
+let pagination1 = document.querySelector(".page1");
 let next = document.querySelector(".next");
 let prev = document.querySelector(".prev");
 let first = document.querySelector(".first");
 let last = document.querySelector(".last");
 let page = 0;
+//pagination for search bar
+let pagination2 = document.querySelector(".page2");
+let next2 = document.querySelector(".next2");
+let prev2 = document.querySelector(".prev2");
+let first2 = document.querySelector(".first2");
+let last2 = document.querySelector(".last2");
+let page_2 = 0;
 
-//variables for getAnime function
+//global variables for getAnime/fetchSearchAnime function
 let animeList = "";
+let animeSearchList = "";
 
 // Menu bar toggle code
 menu_btn.addEventListener("click", function () {
@@ -18,28 +27,6 @@ menu_btn.addEventListener("click", function () {
     menu_btn.classList.toggle("is-active");
     mobile_btn.classList.toggle("is-active");
   }
-});
-
-//Pagination
-next.addEventListener("click", () => {
-  card_layout.innerHTML = "";
-  page += 20;
-  getAnime();
-});
-prev.addEventListener("click", () => {
-  card_layout.innerHTML = "";
-  page -= 20;
-  getAnime();
-});
-first.addEventListener("click", () => {
-  card_layout.innerHTML = "";
-  page = 0;
-  getAnime();
-});
-last.addEventListener("click", () => {
-  card_layout.innerHTML = "";
-  page = 18878;
-  getAnime();
 });
 
 const getAnime = async () => {
@@ -50,10 +37,10 @@ const getAnime = async () => {
     const anime = animeList.data.map((animedata) => ({
       ...animedata,
     }));
-
     displayAnime(anime);
   } catch (e) {
     console.log("Error", e);
+    pagination1.style.display = "none";
   }
 };
 
@@ -96,6 +83,32 @@ const getID = async (info) => {
   location.href = "./page.html";
 };
 
+//pagination for global anime
+    next.addEventListener("click", () => {
+      card_layout.innerHTML = "";
+      page += 20;
+      getAnime();
+    });
+    prev.addEventListener("click", () => {
+      card_layout.innerHTML = "";
+      page -= 20;
+      getAnime();
+    });
+    first.addEventListener("click", () => {
+      card_layout.innerHTML = "";
+      page = 0;
+      getAnime();
+    });
+    last.addEventListener("click", () => {
+      card_layout.innerHTML = "";
+      const link_lastpage = animeList.links.last;
+      const last_page = link_lastpage.split(
+        "https://kitsu.io/api/edge/anime?page%5Blimit%5D=20&page%5Boffset%5D="
+      );
+      page = Number(last_page[1]);
+      getAnime();
+    });
+
 //Tooltip
 var tooltipTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -105,46 +118,74 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 });
 
 //Return to page when redirected
-const page1 = localStorage.getItem("pageNum");
-const page2 = localStorage.getItem("page2");
-if (page1 == page2) {
-  page = Number(page2);
-  getAnime();
-}
+// const page1 = localStorage.getItem("pageNum");
+// const page2 = localStorage.getItem("page2");
+// if (page1 == page2) {
+//   page = Number(page2);
+//   getAnime();
+// }
 
 getAnime();
-
 const animeInput = document.getElementById("input");
 animeInput.addEventListener("keydown", (e) => {
   try {
     const animeSearch = animeInput.value;
-    let url = `https://kitsu.io/api/edge/anime?filter[text]=${animeSearch}&page[limit]=20`;
     if (e.key === "Enter") {
       if (/^\s/.test(animeSearch)) {
         animeSearch = "";
       }
-      const fetchSearchAnime = async () => {
-        const data = await fetch(url);
-        const animeSearchList = await data.json();
-        card_layout.innerHTML = '';
-        displaySearchAnime(animeSearchList);
-      };
-      fetchSearchAnime();
+      fetchSearchAnime(animeSearch);
+      first2.addEventListener("click", () => {
+        card_layout.innerHTML = "";
+        page_2 = 0;
+        console.log(page_2);
+        fetchSearchAnime(animeSearch);
+      });
+      next2.addEventListener("click", () => {
+        card_layout.innerHTML = "";
+        page_2 += 20;
+        console.log(page_2);
+        fetchSearchAnime(animeSearch);
+      });
+      prev2.addEventListener("click", () => {
+        card_layout.innerHTML = "";
+        page_2 -= 20;
+        console.log(page_2);
+        fetchSearchAnime(animeSearch);
+      });
+      last2.addEventListener("click", () => {
+        card_layout.innerHTML = "";
+        const last_page = animeSearchList.links.last;
+        const offsetPage = last_page.split(
+          `https://kitsu.io/api/edge/anime?filter%5Btext%5D=${animeSearch}&page%5Blimit%5D=20&page%5Boffset%5D=`
+        );
+        page_2 = Number(offsetPage[1]);
+        fetchSearchAnime(animeSearch);
+      });
     }
   } catch (e) {
     console.log("Error", e);
   }
 });
 
+const fetchSearchAnime = async (animeSearch) => {
+  let url = `https://kitsu.io/api/edge/anime?filter[text]=${animeSearch}&page[limit]=20&page[offset]=${page_2}`;
+  const data = await fetch(url);
+  animeSearchList = await data.json();
+  pagination1.style.display = "none";
+  pagination2.style.display = "flex";
+  card_layout.innerHTML = "";
+  displaySearchAnime(animeSearchList);
+};
+
 const displaySearchAnime = (animeInput) => {
   const anime = animeInput.data.map((animeDetails) => ({
-    ...animeDetails
+    ...animeDetails,
   }));
 
-  console.log(anime)
-
-  const animePages = Object.values(animeInput)
-  console.log('for link',animePages[2].first);
+  console.log(anime);
+  // const animePages = Object.values(animeInput);
+  // console.log("for link", animePages[2].last);
 
   anime.forEach((animeInfo) => {
     const card = document.createElement("div");
@@ -174,7 +215,5 @@ const displaySearchAnime = (animeInput) => {
       getID(animeInfo);
     });
     card_layout.append(card);
-  })
+  });
 };
-
-

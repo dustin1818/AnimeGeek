@@ -349,6 +349,15 @@ main::after {
   font-size: 24px;
 }
 
+.page2{
+  display: none;
+}
+
+
+.page-link{
+  color: #212121 !;
+}
+
 @media screen and (max-width: 767px) {
   nav {
     display: none;
@@ -425,3 +434,4 @@ main::after {
     transform: translate(50%, -50%);
   }
 }
+
