@@ -1,23 +1,23 @@
-//declare variables
-let menu_btn = document.querySelector(".hamburger");
-let mobile_btn = document.querySelector(".mobile-nav");
-let card_layout = document.getElementById("card-layout__itemz");
+//declare constiables
+const menu_btn = document.querySelector(".hamburger");
+const mobile_btn = document.querySelector(".mobile-nav");
+const card_layout = document.getElementById("card-layout__itemz");
 //page
-let pagination1 = document.querySelector(".page1");
-let next = document.querySelector(".next");
-let prev = document.querySelector(".prev");
-let first = document.querySelector(".first");
-let last = document.querySelector(".last");
+const pagination1 = document.querySelector(".page1");
+const next = document.querySelector(".next");
+const prev = document.querySelector(".prev");
+const first = document.querySelector(".first");
+const last = document.querySelector(".last");
 let page = 0;
 //pagination for search bar
-let pagination2 = document.querySelector(".page2");
-let next2 = document.querySelector(".next2");
-let prev2 = document.querySelector(".prev2");
-let first2 = document.querySelector(".first2");
-let last2 = document.querySelector(".last2");
+const pagination2 = document.querySelector(".page2");
+const next2 = document.querySelector(".next2");
+const prev2 = document.querySelector(".prev2");
+const first2 = document.querySelector(".first2");
+const last2 = document.querySelector(".last2");
 let page_2 = 0;
 
-//global variables for getAnime/fetchSearchAnime function
+//global constiables for getAnime/fetchSearchAnime function
 let animeList = "";
 let animeSearchList = "";
 
@@ -80,7 +80,7 @@ const displayAnime = async (anime) => {
 const getID = async (info) => {
   localStorage.setItem("animeInfo", JSON.stringify(info));
   localStorage.setItem("pageNum", page);
-  location.href = "./page.html";
+  location.href = "./page/page.html";
 };
 
 //pagination for global anime
@@ -110,10 +110,10 @@ const getID = async (info) => {
     });
 
 //Tooltip
-var tooltipTriggerList = [].slice.call(
+const tooltipTriggerList = [].slice.call(
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
 );
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 

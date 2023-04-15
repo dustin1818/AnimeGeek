@@ -1,14 +1,16 @@
 Things to do:
+- add episode list -- 1,2,3,...
+- - add seperate page for anime characters  
+- add trending anime page
+- reviews
 - add scroll up function
 - add categories tab
 - add toast if card is selected
 - add loading page
-- - add 404 error page
+- add 404 error page
 - update styling of page 2
-- add relationships in page 2 so for example naruto(relationships: tsunade,sakura,sasuke,hinata)
-- add episode list -- 1,2,3,...
-- reviews
 - STREAMING LINKS!! if possible
+- adjust favicon image
 =======================
 How to pagination?
 - page offset starts at 0, 5, 10, 15 
