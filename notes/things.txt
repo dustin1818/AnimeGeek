@@ -1,6 +1,4 @@
 Things to do:
-- add episode list -- 1,2,3,...
-- - add seperate page for anime characters  
 - add trending anime page
 - reviews
 - add scroll up function

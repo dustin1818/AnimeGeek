@@ -61,12 +61,17 @@ button:hover {
   transform: translateY(-2px);
 }
 
+.card:hover {
+    transform: scale(1.024);
+    transition: 0.1s all;
+  }
+
 .subheading {
   font-weight: 700;
   margin-right: 3px;
 }
 
-.episode {
+.episode, .character {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
