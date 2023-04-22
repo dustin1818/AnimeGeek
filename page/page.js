@@ -11,8 +11,11 @@ let animeInfo = JSON.parse(localStorage.getItem("animeInfo"));
 let page = 0;
 let page2 = 0;
 let animeEpLink = "";
+let characterData = "";
 episode_container.innerHTML = "";
 character_container.innerHTML = "";
+
+console.log(animeInfo)
 
 const displayInfo = () => {
   anime_name.innerText = `${animeInfo.attributes.canonicalTitle}`;
@@ -49,10 +52,7 @@ const displayInfo = () => {
 
 displayInfo();
 const vid = document.getElementById("vid-frame");
-animeInfo.attributes.youtubeVideoId
-  ? animeInfo.attributes.youtubeVideoId
-  : (vid.style.display = "none");
-
+animeInfo.attributes.youtubeVideoId ? animeInfo.attributes.youtubeVideoId: (vid.style.display = "none");
 function backPage() {
   const pageNum = localStorage.getItem("pageNum");
   localStorage.setItem("page2", pageNum);
@@ -101,18 +101,26 @@ getAnimeEpisode();
 
 const getAnimeCharacter = async () => {
   try{
-    const data = await fetch(`https://kitsu.io/api/edge/anime/${animeInfo.id}/anime-characters?page%5Blimit%5D=20&page%5Boffset%5D=${page2}`);
+    characterData = (`https://kitsu.io/api/edge/anime/${animeInfo.id}/anime-characters?page%5Blimit%5D=20&page%5Boffset%5D=${page2}`);
+    const data = await fetch(characterData);
     const animeData = await data.json();
-    console.log(animeData);
-    animeData.data.forEach((element) => {
-      const characters = element.relationships.character.links.related;
+    console.log(animeData.data.length);
+    if(animeData.data.length === 0){
+      character_text.style.display = "none";
+      load_btn2.style.display = "none";
+      const no_character = document.createElement("h3");
+      no_character.innerText = "No Character Data";
+      character_container.append(no_character);
+    }
+    animeData.data.forEach((anime) => {
+      const characters = anime.relationships.character.links.related;
       getAnimeCharacterData(characters);
     });
   }catch(e){
     console.log('Error', e)
     character_text.style.display = "none";
     load_btn2.style.display = "none";
-    const no_character = document.createElement("h2");
+    const no_character = document.createElement("h3");
     no_character.innerText = "No Character Data";
     character_container.append(no_character);
   }
@@ -138,6 +146,11 @@ const getAnimeCharacterData = async (characters) => {
     character_container.innerHTML += html;
   } catch (e) {
     console.log("Error", e);
+    // character_text.style.display = "none";
+    // load_btn2.style.display = "none";
+    // const no_character = document.createElement("h3");
+    // no_character.innerText = "No Character Data";
+    // character_container.append(no_character);
   }
 };
 
