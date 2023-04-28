@@ -1,4 +1,8 @@
 Things to do:
+- when you click card it redirect to another page displaying their episode details, character details
+- when you search then there is no anime display "Search Error" or an illustration not found
+- add streaming links 
+- fix layout for ep and character list for mobile
 - add trending anime page
 - reviews
 - add scroll up function

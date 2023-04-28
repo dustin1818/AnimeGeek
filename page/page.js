@@ -1,3 +1,4 @@
+"use strict";
 //declaring variables for page.js
 const anime_name = document.getElementById("anime-name");
 const container = document.querySelector(".anime");
@@ -34,6 +35,14 @@ const displayInfo = () => {
   const checkEpisode = animeInfo.attributes.episodeCount
     ? `${animeInfo.attributes.episodeCount}`
     : "N/A";
+  let checkStatus = 
+    animeInfo.attributes.status
+    //code for capitalize
+    ? `${animeInfo.attributes.status}`.charAt(0).toUpperCase() + `${animeInfo.attributes.status}`.slice(1)
+    : "N/A"
+   if(checkStatus === "Current"){
+    checkStatus = "Ongoing"
+   }
   const animePage = `
     <img src="${animeInfo.attributes.posterImage.large}" alt="${animeInfo.attributes.posterImage.large}">
     <div class="anime-info"> 
@@ -44,6 +53,7 @@ const displayInfo = () => {
     <p><span class = "subheading">Start Date:</span>  ${checkStartDate}</p>
     <p><span class = "subheading">End Date:</span>  ${checkEndDate}</p>
     <p><span class = "subheading">Episodes:</span>  ${checkEpisode}</p>
+    <p><span class = "subheading">Status:</span>  ${checkStatus}</p>
     </div>
     <iframe id="vid-frame" width="560" height="315" src="https://www.youtube.com/embed/${animeInfo.attributes.youtubeVideoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     `;
@@ -65,23 +75,34 @@ const getAnimeEpisode = async () => {
     const data = await fetch(animeEpLink);
     const episode = await data.json();
     const episodeArr = episode.data;
-    const animeEps = episodeArr
-      .map(
-        (episode) => `
-      <div class="card">
-        <img src= "${episode.attributes.thumbnail.original}" class="card-img-top" alt="${episode.attributes.thumbnail.original}">
-          <div class="card-body">
-            <h7 class="card-title">Season: ${episode.attributes.seasonNumber}</h7>
-            <h5 class="card-title my-3">Ep:${episode.attributes.number} - ${episode.attributes.canonicalTitle}</h5>
-            <p class="card-text">${episode.attributes.synopsis}</p>
-            <p class="card-text">Duration: ${episode.attributes.length}mins</p>
-          </div>
-      </div>
-        `
-      )
-      .join("");
-    episode_container.innerHTML += animeEps;
-    episode.links.next ? episode.links.next : (load_btn.style.display = "none");
+    console.log(episodeArr);
+    episodeArr
+      .forEach((episode) =>{
+        const card = document.createElement("div");
+        card.classList.add("card");
+        const img = document.createElement("img");
+        img.classList.add("card-img-top");
+        img.src = episode.attributes.thumbnail.original;
+        img.setAttribute("alt", `${episode.attributes.thumbnail.original}`);
+        const card_body = document.createElement("div");
+        card_body.classList.add("card-body");
+        const card_title = document.createElement("h7");
+        card_title.classList.add("card-title");
+        card_title.innerText = `Season: ${episode.attributes.seasonNumber}`;
+        const card_ep = document.createElement("h5");
+        card_ep.classList.add("card-title");
+        card_ep.classList.add("my-3");
+        card_ep.innerText = `Ep: ${episode.attributes.number} - ${episode.attributes.canonicalTitle}`;
+        const card_time = document.createElement("p");
+        card_time.innerText = `Duration: ${episode.attributes.length}mins`;
+        card_body.append(card_title,card_ep,card_time);
+        card.append(img,card_body);
+        card.addEventListener('click', () => {
+          animeEpisodePage(episode);
+        })
+        episode_container.append(card)
+      })
+    episode.links.next ? episode. links.next : (load_btn.style.display = "none");
   } catch (e) {
     console.log("Error", e);
     episode_text.style.display = "none";
@@ -99,12 +120,16 @@ const loadMoreEp = () => {
 
 getAnimeEpisode();
 
+const animeEpisodePage = (ep) => {
+  console.log(ep);
+}
+
+
 const getAnimeCharacter = async () => {
   try{
     characterData = (`https://kitsu.io/api/edge/anime/${animeInfo.id}/anime-characters?page%5Blimit%5D=20&page%5Boffset%5D=${page2}`);
     const data = await fetch(characterData);
     const animeData = await data.json();
-    console.log(animeData.data.length);
     if(animeData.data.length === 0){
       character_text.style.display = "none";
       load_btn2.style.display = "none";
@@ -117,14 +142,13 @@ const getAnimeCharacter = async () => {
       getAnimeCharacterData(characters);
     });
   }catch(e){
-    console.log('Error', e)
+    console.log("Error", e)
     character_text.style.display = "none";
     load_btn2.style.display = "none";
     const no_character = document.createElement("h3");
     no_character.innerText = "No Character Data";
     character_container.append(no_character);
   }
-
 };
 
 getAnimeCharacter();
@@ -134,29 +158,35 @@ const getAnimeCharacterData = async (characters) => {
     const data = await fetch(characters);
     const animeData = await data.json();
     const animeCharInfos = animeData.data.attributes;
-    const html = `
-      <div class="card">
-      <img src= "${animeCharInfos.image.original}" class="card-img-top" alt="${animeCharInfos.image.original}">
-        <div class="card-body">
-          <h2 class="card-title my-3">${animeCharInfos.canonicalName}</h2>
-          <p class="card-text">${animeCharInfos.description}</p>
-        </div>
-    </div>
-      `;
-    character_container.innerHTML += html;
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const img = document.createElement("img");
+    img.classList.add("card-img-top");
+    img.src = animeCharInfos.image.original;
+    img.setAttribute("alt", `${animeCharInfos.image.original}`);
+    const card_body = document.createElement("div");
+    card_body.classList.add("card-body");
+    const card_title = document.createElement("h2");
+    card_title.classList.add("card-title");
+    card_title.classList.add("my-3");
+    card_title.innerText =`${animeCharInfos.canonicalName}`;
+    card_body.append(card_title);
+    card.append(img,card_body)
+    card.addEventListener('click', () => {
+      redirectToAnimeCharac(animeData);
+    })
+    character_container.append(card);
   } catch (e) {
     console.log("Error", e);
-    // character_text.style.display = "none";
-    // load_btn2.style.display = "none";
-    // const no_character = document.createElement("h3");
-    // no_character.innerText = "No Character Data";
-    // character_container.append(no_character);
   }
 };
 
 getAnimeCharacterData();
-
 const loadMoreCharacter = () => {
   page2 += 20;
   getAnimeCharacter();
 };
+
+const redirectToAnimeCharac = (e) => {
+console.log(e);
+}

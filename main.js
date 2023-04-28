@@ -1,3 +1,5 @@
+"use strict";
+
 //declare constiables
 const menu_btn = document.querySelector(".hamburger");
 const mobile_btn = document.querySelector(".mobile-nav");
