@@ -63,31 +63,35 @@ const displayInfo = () => {
 displayInfo();
 
 const fetchStreamLink = async () => {
-  const url = await fetch(`https://kitsu.io/api/edge/anime/${animeInfo.id}/streaming-links`);
-  const data = await url.json();
-  console.log(data.data);
-  let anime_links = "";
-  let list_ep = document.createElement("ul");
-  let subheading = document.createElement("p");
-  subheading.classList.add("subheading");
-  subheading.classList.add("w-100");
-  subheading.innerText = "Subheading Links:";
-  let list_container = document.createElement("div");
-  list_container.append(subheading);
-  data.data.forEach((anime) => {
-    anime_links = anime.attributes.url;
-    let list = document.createElement("li");
-    let list_link = document.createElement("a");
-    list_link.innerText = anime_links;
-    list_link.target = "_blank";
-    list_link.href = ` ${anime_links}`;
-    list.append(list_link);
-    list_ep.append(list);
-    list_container.append(list);
-    const anime_info = document.querySelector(".anime-info");
-    anime_info.append(list_container);
-    console.log(anime_links);
-  })
+  try {
+    const url = await fetch(`https://kitsu.io/api/edge/anime/${animeInfo.id}/streaming-links`);
+    const data = await url.json();
+    console.log(data.data);
+    let anime_links = "";
+    let list_ep = document.createElement("ul");
+    let subheading = document.createElement("p");
+    subheading.classList.add("subheading");
+    subheading.classList.add("w-100");
+    subheading.innerText = "Subheading Links:";
+    let list_container = document.createElement("div");
+    list_container.append(subheading);
+    data.data.forEach((anime) => {
+      anime_links = anime.attributes.url;
+      let list = document.createElement("li");
+      let list_link = document.createElement("a");
+      list_link.innerText = anime_links;
+      list_link.target = "_blank";
+      list_link.href = ` ${anime_links}`;
+      list.append(list_link);
+      list_ep.append(list);
+      list_container.append(list);
+      const anime_info = document.querySelector(".anime-info");
+      anime_info.append(list_container);
+      console.log(anime_links);
+    })
+  } catch (error) {
+    console.log('Error', error)
+  }
 }
 
 fetchStreamLink();

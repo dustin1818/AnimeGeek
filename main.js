@@ -49,6 +49,7 @@ const getAnime = async () => {
 const displayAnime = async (anime) => {
   const animeHTML = anime;
   animeHTML.forEach((info) => {
+    console.log(info);
     const card = document.createElement("div");
     card.classList.add("card");
     const image_upper = document.createElement("div");
@@ -60,7 +61,7 @@ const displayAnime = async (anime) => {
     const box_rating = document.createElement("div");
     box_rating.classList.add("box_rating");
     const value = `${info.attributes.averageRating}`;
-    box_rating.innerText = Math.round(value) + " / 100";
+    box_rating.innerText = Math.round(value) + " / 90";
     image_upper.append(img_card, box_rating);
     const info_container = document.createElement("div");
     info_container.classList.add("card__content");
