@@ -61,6 +61,37 @@ const displayInfo = () => {
 };
 
 displayInfo();
+
+const fetchStreamLink = async () => {
+  const url = await fetch(`https://kitsu.io/api/edge/anime/${animeInfo.id}/streaming-links`);
+  const data = await url.json();
+  console.log(data.data);
+  let anime_links = "";
+  let list_ep = document.createElement("ul");
+  let subheading = document.createElement("p");
+  subheading.classList.add("subheading");
+  subheading.classList.add("w-100");
+  subheading.innerText = "Subheading Links:";
+  let list_container = document.createElement("div");
+  list_container.append(subheading);
+  data.data.forEach((anime) => {
+    anime_links = anime.attributes.url;
+    let list = document.createElement("li");
+    let list_link = document.createElement("a");
+    list_link.innerText = anime_links;
+    list_link.target = "_blank";
+    list_link.href = ` ${anime_links}`;
+    list.append(list_link);
+    list_ep.append(list);
+    list_container.append(list);
+    const anime_info = document.querySelector(".anime-info");
+    anime_info.append(list_container);
+    console.log(anime_links);
+  })
+}
+
+fetchStreamLink();
+
 const vid = document.getElementById("vid-frame");
 animeInfo.attributes.youtubeVideoId ? animeInfo.attributes.youtubeVideoId: (vid.style.display = "none");
 function backPage() {
@@ -75,7 +106,6 @@ const getAnimeEpisode = async () => {
     const data = await fetch(animeEpLink);
     const episode = await data.json();
     const episodeArr = episode.data;
-    console.log(episodeArr);
     episodeArr
       .forEach((episode) =>{
         const card = document.createElement("div");
@@ -97,7 +127,7 @@ const getAnimeEpisode = async () => {
         card_time.innerText = `Duration: ${episode.attributes.length}mins`;
         card_body.append(card_title,card_ep,card_time);
         card.append(img,card_body);
-        card.addEventListener('click', () => {
+        card.addEventListener("click", () => {
           animeEpisodePage(episode);
         })
         episode_container.append(card)
@@ -121,9 +151,9 @@ const loadMoreEp = () => {
 getAnimeEpisode();
 
 const animeEpisodePage = (ep) => {
-  console.log(ep);
+  localStorage.setItem("Episode-Details", JSON.stringify(ep));
+  location.href = "../episode/episode.html";  
 }
-
 
 const getAnimeCharacter = async () => {
   try{
@@ -172,7 +202,7 @@ const getAnimeCharacterData = async (characters) => {
     card_title.innerText =`${animeCharInfos.canonicalName}`;
     card_body.append(card_title);
     card.append(img,card_body)
-    card.addEventListener('click', () => {
+    card.addEventListener("click", () => {
       redirectToAnimeCharac(animeData);
     })
     character_container.append(card);

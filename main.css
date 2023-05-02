@@ -160,7 +160,6 @@ main::after {
 }
 
 .main-wrapper {
-  position: relative;
   z-index: 1;
   color: #fff;
   flex-direction: column;
@@ -215,7 +214,7 @@ main::after {
 
 .container_mouse {
   position: absolute;
-  bottom: -167px;
+  bottom: 20px;
   left: 50%;
 }
 
