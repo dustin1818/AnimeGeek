@@ -359,8 +359,8 @@ main::after {
 
 .img-err{
   height: auto;
-  width: 100%;
   background-size: contain;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 767px) {
