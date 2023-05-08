@@ -357,13 +357,18 @@ main::after {
   color: #212121 !;
 }
 
+.img-err{
+  height: auto;
+  width: 100%;
+}
+
 @media screen and (max-width: 767px) {
   nav {
     display: none;
   }
 
   .container {
-    padding: 0 20px;
+    padding: 40px 20px;
   }
 }
 

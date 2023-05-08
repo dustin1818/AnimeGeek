@@ -221,6 +221,8 @@ const loadMoreCharacter = () => {
   getAnimeCharacter();
 };
 
-const redirectToAnimeCharac = (e) => {
-console.log(e);
+const redirectToAnimeCharac = (charac) => {
+localStorage.setItem("Character-Details", JSON.stringify(charac));
+console.log(charac)
+location.href = "../character/character.html";  
 }

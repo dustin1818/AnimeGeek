@@ -49,7 +49,6 @@ const getAnime = async () => {
 const displayAnime = async (anime) => {
   const animeHTML = anime;
   animeHTML.forEach((info) => {
-    console.log(info);
     const card = document.createElement("div");
     card.classList.add("card");
     const image_upper = document.createElement("div");
@@ -172,13 +171,25 @@ animeInput.addEventListener("keydown", (e) => {
 });
 
 const fetchSearchAnime = async (animeSearch) => {
-  let url = `https://kitsu.io/api/edge/anime?filter[text]=${animeSearch}&page[limit]=20&page[offset]=${page_2}`;
-  const data = await fetch(url);
-  animeSearchList = await data.json();
-  pagination1.style.display = "none";
-  pagination2.style.display = "flex";
-  card_layout.innerHTML = "";
-  displaySearchAnime(animeSearchList);
+  try {
+    let url = `https://kitsu.io/api/edge/anime?filter[text]=${animeSearch}&page[limit]=20&page[offset]=${page_2}`;
+    const data = await fetch(url);
+    animeSearchList = await data.json();
+    pagination1.style.display = "none";
+    pagination2.style.display = "flex";
+    card_layout.innerHTML = "";
+    displaySearchAnime(animeSearchList);
+
+    
+  } catch (error) {
+    console.log('Error', error);
+    // pagination1.style.display = "none";
+    // const img = document.createElement('img');
+    // img.src = './undraw_page_not_found_re_e9o6.svg';
+    // card_layout.innerHTML = "";
+    // card_layout.innerHTML = img;
+  }
+
 };
 
 const displaySearchAnime = (animeInput) => {
@@ -186,9 +197,14 @@ const displaySearchAnime = (animeInput) => {
     ...animeDetails,
   }));
 
-  console.log(anime);
-  // const animePages = Object.values(animeInput);
-  // console.log("for link", animePages[2].last);
+  console.log(anime.length);
+  if(anime.length === 0){
+    pagination2.style.display = "none";
+    const img = document.createElement('img');
+    img.src = './404.png';
+    img.classList.add('img-err');
+    card_layout.append(img);
+  }
 
   anime.forEach((animeInfo) => {
     const card = document.createElement("div");
@@ -202,7 +218,7 @@ const displaySearchAnime = (animeInput) => {
     const box_rating = document.createElement("div");
     box_rating.classList.add("box_rating");
     const value = `${animeInfo.attributes.averageRating}`;
-    box_rating.innerText = Math.round(value) + " / 100";
+    box_rating.innerText = Math.round(value) + " / 90";
     image_upper.append(img_card, box_rating);
     const info_container = document.createElement("div");
     info_container.classList.add("card__content");
